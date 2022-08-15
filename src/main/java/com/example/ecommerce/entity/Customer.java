@@ -1,5 +1,6 @@
 package com.example.ecommerce.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,7 +19,7 @@ public class Customer {
     private String username;
     private String password;
     private String email;
-
+    @JsonIgnore
     @OneToOne(mappedBy = "client")
     private Cart cart;
 

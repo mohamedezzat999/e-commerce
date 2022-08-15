@@ -1,13 +1,13 @@
 package com.example.ecommerce.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
-@Data
+@Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -17,7 +17,7 @@ public class Line_Item {
     @GeneratedValue
     private long id;
     private int quantity;
-
+    @JsonIgnore
     @OneToMany(mappedBy="line_item")
     private List<Product> products;
 

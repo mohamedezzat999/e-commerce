@@ -1,6 +1,7 @@
 package com.example.ecommerce.controller;
 
 import com.example.ecommerce.entity.Product;
+import com.example.ecommerce.model.dto.ProductDto;
 import com.example.ecommerce.model.request.AddProductRequest;
 import com.example.ecommerce.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class ProductController {
     }
 
 
-    @GetMapping
+    @GetMapping(value = { "", "/" })
     public List<Product> getAllProducts(){
         return productService.getAllProducts();
     }
@@ -31,8 +32,8 @@ public class ProductController {
         return productService.getProductById(id);
     }
     @PostMapping
-    public void addProduct (@RequestBody AddProductRequest addProductRequest){
-        productService.addProduct(addProductRequest);
+    public void addProduct (@RequestBody ProductDto productDto){
+        productService.addProduct(productDto);
     }
 
     @DeleteMapping("/{id}")
@@ -40,4 +41,10 @@ public class ProductController {
         productService.deleteProduct(id);
     }
 
+
+    @PutMapping("/{cartId}/products/{productId}")
+    Product assignProductToCart(@PathVariable long cartId,
+                                @PathVariable long productId){
+       return productService.assignProductToCart(cartId,productId);
+    }
 }

@@ -1,13 +1,15 @@
 package com.example.ecommerce.model.dto;
 
-import com.example.ecommerce.entity.Customer;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Setter
+@Getter
 
-public class CustomerDto extends Customer {
+public class CustomerDto {
 
     private String username;
     private String email;
+    private String password;
 
 }

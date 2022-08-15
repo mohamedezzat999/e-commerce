@@ -1,5 +1,6 @@
 package com.example.ecommerce.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,16 +19,20 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NotNull
-
     private String name;
     private double price;
 
-    @ManyToOne
-    @JoinColumn(name="cart_id")
-    private Cart cart;
 
+    @JsonIgnore
+    @ManyToOne(cascade = CascadeType.ALL,optional = true)
+    @JoinColumn(name="cart_id",referencedColumnName = "id")
+    private Cart cart;
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "line_item_id")
     private Line_Item line_item;
+
+    public void assignCart(Cart cart){
+        this.cart = cart;
+    }
 }
