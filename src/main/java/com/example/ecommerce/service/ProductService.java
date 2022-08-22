@@ -1,10 +1,10 @@
 package com.example.ecommerce.service;
-
 import com.example.ecommerce.entity.Cart;
-import com.example.ecommerce.entity.Line_Item;
+import com.example.ecommerce.entity.LineItem;
 import com.example.ecommerce.entity.Product;
 import com.example.ecommerce.model.dto.ProductDto;
 import com.example.ecommerce.repository.CartRepository;
+import com.example.ecommerce.repository.Line_ItemRepository;
 import com.example.ecommerce.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,11 +15,11 @@ import java.util.List;
 public class ProductService {
     @Autowired
     private final ProductRepository productRepository;
-    private final CartRepository cartRepository;
+    private final Line_ItemRepository lineItemRepository;
 
-    public ProductService(ProductRepository productRepository, CartRepository cartRepository) {
+    public ProductService(ProductRepository productRepository, Line_ItemRepository lineItemRepository) {
         this.productRepository = productRepository;
-        this.cartRepository = cartRepository;
+        this.lineItemRepository = lineItemRepository;
     }
     public List<Product> getAllProducts(){
         return productRepository.findAll();
@@ -31,15 +31,15 @@ public class ProductService {
         Product product = new Product();
         product.setPrice(productDto.getPrice());
         product.setName(productDto.getName());
-        product.setCart(new Cart());
-        product.setLine_item(new Line_Item());
         productRepository.save(product);
     }
 
-    public Product assignProductToCart (Long cartId,Long productId){
+    public Product assignProductToLineItem (Long lineItemsId ,Long productId){
         Product product = productRepository.findById(productId).get();
-        Cart cart = cartRepository.findById(cartId).get();
-        product.assignCart(cart);
+        LineItem lineItem = lineItemRepository.findById(lineItemsId).get();
+        product.lineItems.add(lineItem);
+        lineItem.assignProduct(product);
+        lineItemRepository.save(lineItem);
         return productRepository.save(product);
     }
     public void deleteProduct(Long id){

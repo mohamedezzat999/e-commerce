@@ -2,7 +2,6 @@ package com.example.ecommerce.controller;
 
 import com.example.ecommerce.entity.Product;
 import com.example.ecommerce.model.dto.ProductDto;
-import com.example.ecommerce.model.request.AddProductRequest;
 import com.example.ecommerce.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -41,10 +40,10 @@ public class ProductController {
         productService.deleteProduct(id);
     }
 
-
-    @PutMapping("/{cartId}/products/{productId}")
-    Product assignProductToCart(@PathVariable long cartId,
-                                @PathVariable long productId){
-       return productService.assignProductToCart(cartId,productId);
+    @PutMapping("/{LineItemId}/lineItems/{productId}")
+    public Product assignProductToLineItem(@PathVariable long LineItemId,
+                                           @PathVariable long productId){
+        return productService.assignProductToLineItem(LineItemId,productId);
     }
+
 }

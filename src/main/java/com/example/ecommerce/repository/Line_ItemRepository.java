@@ -1,7 +1,9 @@
 package com.example.ecommerce.repository;
 
-import com.example.ecommerce.entity.Line_Item;
+import com.example.ecommerce.entity.LineItem;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface Line_ItemRepository extends JpaRepository<Line_Item,Long> {
+@Repository
+public interface Line_ItemRepository extends JpaRepository<LineItem ,Long > {
 }

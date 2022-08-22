@@ -1,12 +1,13 @@
 package com.example.ecommerce.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -22,17 +23,10 @@ public class Product {
     private String name;
     private double price;
 
-
     @JsonIgnore
-    @ManyToOne(cascade = CascadeType.ALL,optional = true)
-    @JoinColumn(name="cart_id",referencedColumnName = "id")
-    private Cart cart;
-    @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "line_item_id")
-    private Line_Item line_item;
+    @ManyToMany(fetch = FetchType.EAGER)
+    public List<LineItem> lineItems = new ArrayList<>();
 
-    public void assignCart(Cart cart){
-        this.cart = cart;
-    }
+
+
 }

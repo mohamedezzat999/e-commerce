@@ -18,3 +18,7 @@ spring:
 server:
   servlet:
     context-path: /users
+
+logging :
+  file:
+    name: logs/logfile.log

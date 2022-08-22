@@ -53,6 +53,6 @@ public class CustomerService {
     ProductService productService;
     public void addItems(Long id ,Long product_id){
         Cart cart = new Cart();
-        cart.products.add(productService.getProductById(id));
+       // cart.products.add(productService.getProductById(id));
     }
 }
